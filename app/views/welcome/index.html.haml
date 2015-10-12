@@ -1,0 +1,17 @@
+%div{style:"width: 400px;margin:100px auto; text-align: center;"}
+	%h2 Send push notification
+
+
+	=semantic_form_for @push_message do |f|
+
+		=f.semantic_errors
+
+		=f.input :message, :hint => "Enter the message to be sent"
+		=f.action :submit
+
+		%br
+		%hr
+		%div{style:"text-align:left"}
+			-@messages.each do |push_message|
+				%p
+					="message sent: #{push_message.message}"

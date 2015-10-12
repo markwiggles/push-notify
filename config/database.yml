@@ -1,0 +1,26 @@
+# PostgreSQL. Versions 8.2 and up are supported.
+#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: docker
+  template: template0
+
+
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+development:
+  <<: *default
+  database: docker
+  password: docker
+
+
+
+#
+production:
+  <<: *default
+  database: docker
+  password: <%= ENV['DATABASE_PASSWORD'] %>
