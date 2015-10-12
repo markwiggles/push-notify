@@ -1,6 +1,6 @@
 # Dockerfile
 
-FROM phusion/passenger-ruby21:0.9.15
+FROM phusion/passenger-ruby22:latest
 
 # Set correct environment variables.
 ENV HOME /root
@@ -8,10 +8,11 @@ ENV HOME /root
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
-# Install bundle of gems
+# Copy the Gemfile and Gemfile.lock into the image.
+# Temporarily set the working directory to where they are.
 WORKDIR /tmp
-ADD Gemfile /tmp/
-ADD Gemfile.lock /tmp/
+ADD Gemfile Gemfile
+ADD Gemfile.lock Gemfile.lock
 RUN bundle install
 
 # Add the Rails app from the current directory to /myapp w- permissions

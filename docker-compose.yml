@@ -1,6 +1,6 @@
 # docker-compose.yml
 db:
-  image: markwigg/dbpostimg
+  image: markwiggles/dbpostimg
   ports:
     - "49153:5432"
 
@@ -10,14 +10,14 @@ redis:
     - "6379"
 
 sidekiq:
-  image: markwigg/push-notify
+  image: markwiggles/push-notify
   command: bundle exec sidekiq RAILS_ENV=production
   links:
     - db
     - redis
 
 web:
-  image: markwigg/push-notify
+  image: markwiggles/push-notify
   ports:
     - "80:80"
   # command: bundle exec rails server -b 0.0.0.0
