@@ -7,7 +7,6 @@ default: &default
   username: docker
   template: template0
 
-
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
@@ -15,11 +14,7 @@ default: &default
 development:
   <<: *default
   database: docker
-  password: docker
 
-
-
-#
 production:
   <<: *default
   database: docker
