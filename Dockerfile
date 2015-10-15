@@ -25,7 +25,7 @@ RUN rm -f /etc/service/nginx/down
 # Remove the default site & add the nginx info for our site, inc. env variables
 RUN rm /etc/nginx/sites-enabled/default
 ADD nginx.conf /etc/nginx/sites-enabled/webapp.conf
-ADD environment.conf /etc/nginx/main.d/rails-env.conf
+ADD rails-env.conf /etc/nginx/main.d/rails-env.conf
 
 
 # Clean up APT and bundler when done.
