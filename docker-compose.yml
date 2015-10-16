@@ -17,7 +17,7 @@ redis:
 web:
   image: push-notify
   environment:
-    VIRTUAL_HOST: push.jolart.com
+    VIRTUAL_HOST: localhost
     RAILS_ENV: production
   env_file:
     - 'secrets.env'
