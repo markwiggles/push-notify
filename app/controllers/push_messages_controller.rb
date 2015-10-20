@@ -1,5 +1,12 @@
 class PushMessagesController < ApplicationController
+ before_action :check_if_admin
+
  include PushMessagesHelper
+
+ def index
+  @push_message = PushMessage.new
+  @messages = PushMessage.all
+ end
 
  def new
   push_message = PushMessage.new
@@ -25,4 +32,12 @@ class PushMessagesController < ApplicationController
    :response
   )
  end
+
+ def check_if_admin
+  if !current_user.nil? # if a user is logged in
+   redirect_to root_path unless Role.find(current_user.role_id).access_level == 1 # check if admin level
+  else
+   redirect_to root_path
+  end
+end
 end

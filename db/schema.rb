@@ -11,21 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928224950) do
+ActiveRecord::Schema.define(version: 20151018064316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "account", primary_key: "user_id", force: :cascade do |t|
-    t.string   "username",   limit: 50,  null: false
-    t.string   "password",   limit: 50,  null: false
-    t.string   "email",      limit: 355, null: false
-    t.datetime "created_on",             null: false
-    t.datetime "last_login"
-  end
-
-  add_index "account", ["email"], name: "account_email_key", unique: true, using: :btree
-  add_index "account", ["username"], name: "account_username_key", unique: true, using: :btree
 
   create_table "devices", force: :cascade do |t|
     t.string   "token"
@@ -39,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150928224950) do
   add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
 
   create_table "push_messages", force: :cascade do |t|
+    t.string   "title"
     t.string   "message"
     t.string   "response"
     t.string   "additional"
@@ -46,12 +36,35 @@ ActiveRecord::Schema.define(version: 20150928224950) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.integer  "access_level"
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.integer  "role_id"
   end
 
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
+
   add_foreign_key "devices", "users"
+  add_foreign_key "users", "roles"
 end
