@@ -1,8 +1,6 @@
 class PushMessagesController < ApplicationController
  before_action :check_if_admin
 
- include PushMessagesHelper
-
  def index
   @push_message = PushMessage.new
   @messages = PushMessage.all
