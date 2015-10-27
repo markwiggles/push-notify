@@ -1,0 +1,9 @@
+%div.pull-right
+	#user-logged.text-right
+		-if !user_signed_in? # then login button
+			= link_to "Log In", "#myModal", "data-toggle" => "modal"
+		-else # show the user
+			%span#user-name
+				logged in as:&nbsp;
+				= current_user.name
+			= link_to "Log Out", destroy_user_session_path, method: :delete

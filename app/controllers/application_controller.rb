@@ -22,4 +22,9 @@ end
  def after_sign_in_path_for(_resource)
   member_index_path(current_user) # path after sign in
  end
+
+ # def default_serializer_options
+ #   {root: false}
+ # end
+
 end

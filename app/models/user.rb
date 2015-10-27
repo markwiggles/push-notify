@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 	has_many :devices, dependent: :destroy
-
 	accepts_nested_attributes_for :devices, allow_destroy: true
 
+# TODO email unique
 end

@@ -1,7 +1,7 @@
+
 #main-wrapper {
-	width: 1000px;
 	margin: 0 auto;
-	text-align: left;
+	text-align: center;
 }
 #user-logged {
 	text-align: right;
@@ -9,4 +9,18 @@
 	#user-name {
 		margin: 0 20px;
 	}
+	a {
+		color: #fff;
+	}
+}
+.navbar {
+	border: none;
+}
+.navbar-nav > li > a {
+	border: none;
+}
+.navbar-nav {
+	display: inline-block;
+	float: none;
+	margin: 0 auto;
 }

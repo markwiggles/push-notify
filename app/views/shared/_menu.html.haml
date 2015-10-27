@@ -1,0 +1,14 @@
+.navbar-collapse.collapse
+	.container
+		%ul.nav.navbar-nav
+
+			-if role_is_member? # show if member or greater
+				%li
+					=link_to 'Home', welcome_index_path
+				%li
+					=link_to 'Member', member_index_path
+			-if role_is_admin? # show only if admin
+				%li
+					=link_to 'Push Messages', push_messages_path
+				%li
+					=link_to 'Admin', admin_root_path

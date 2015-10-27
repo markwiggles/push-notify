@@ -1,46 +1,31 @@
 !!!
 %html
   %head
-    %title PushNotify
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    %title Push Notify
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
     #main-wrapper
-      %nav.navbar.navbar-default
-        #user-logged.text-right
-          -if !user_signed_in? # then login button
-            = link_to "Log In", "#myModal", "data-toggle" => "modal"
-          -else # show the user
-            %span#user-name
-              logged in as:&nbsp;
-              = current_user.name
-            = link_to "Log Out", destroy_user_session_path, method: :delete
-
-        .container-fluid
+      = render 'shared/login_modal'
+      #menu-section.navbar.navbar-inverse.navbar-fixed-top.scroll-me
+        .container
           .navbar-header
-            %a.navbar-brand{:href => "#"} One App
-          %div
-            %ul.nav.navbar-nav
-              %li
-                =link_to 'Home', welcome_index_path
-              -if role_is_member? # show if member or greater
-                %li
-                  =link_to 'Member', member_index_path
-              -if role_is_admin? # show only if admin
-                %li
-                  =link_to 'Push Messages', push_messages_path
-                %li
-                  =link_to 'Admin', admin_root_path  
-
+            .container
+              =render 'shared/brand'
+              =render 'shared/logged_in'
+            %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+          .navbar-collapse.collapse
+            .container
+              =render 'shared/menu'
       .text-center
-        = render 'shared/login_modal'
-
-      .text-center
-        %br
         %p.notice
           = notice
         %p.alert
           = alert
-
-      = yield
+      .row
+        .container-fluid{style: "margin-top:100px;text-align:center"}
+          = yield

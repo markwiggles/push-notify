@@ -1,5 +1,6 @@
 class API::V1::UsersController < ApplicationController
- protect_from_forgery with: :null_session
+ protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
+ skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
 
  def index
   users = User.all
@@ -21,6 +22,7 @@ class API::V1::UsersController < ApplicationController
   params.require(:user).permit(
    :name,
    :email,
+   :password,
    devices_attributes: [:token, :platform, :enabled]
   )
  end

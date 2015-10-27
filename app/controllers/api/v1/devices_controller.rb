@@ -1,5 +1,5 @@
 class API::V1::DevicesController < ApplicationController
- skip_before_filter :verify_authenticity_token
+  protect_from_forgery with: :null_session
 
  def index
   devices = Device.all

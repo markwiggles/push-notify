@@ -1,9 +1,11 @@
 
 
 @import "bootstrap-sprockets";
-@import "bootswatch/slate/variables";
+@import "overrides";
+@import "bootswatch/flatly/variables";
+
 @import "bootstrap";
-@import "bootswatch/slate/bootswatch";
+@import "bootswatch/flatly/bootswatch";
 
 /*
 Included bootswatches
