@@ -16,8 +16,8 @@ RUN bundle install
 # Add the Rails app from the current directory to /myapp w- permissions
 ADD . /home/app/webapp
 RUN chown -R app:app /home/app/webapp
-RUN touch /home/app/webapp/log/production.log
-RUN chmod -R 775 /home/app/webapp/log/production.log
+RUN mkdir /home/app/webapp/log && touch /home/app/webapp/log/production.log && \
+chmod -R 775 /home/app/webapp/log/production.log
 
 WORKDIR /home/app/webapp
 RUN RAILS_ENV=production rake assets:precompile
