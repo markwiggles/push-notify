@@ -19,11 +19,13 @@ class PushWorker
    message: push_message.message,
    ledColor: [0, 0, 255, 0], notId: DateTime.now.to_i } }
 
-  gcm = GCM.new('AIzaSyAnui6vkf4PG6j7TEDhBqETmU2cbCnmzIc') 
+  gcm = GCM.new('AIzaSyAnui6vkf4PG6j7TEDhBqETmU2cbCnmzIc')
   gcm_response = gcm.send(registrations, options) # send the GCM messages
   #-------------------------------------------------------------------------------
   # APPLE NOTIFICATION SERVICE
-  ios_devices = Device.where(enabled: true, platform: 'ios')
+  ios_devices = Device.where(enabled: true, platform: 'iOS')
+
+  logger.debug("IOS DEVICES: #{ios_devices}")
 
   ios_devices.each do |device|
    notification = Grocer::Notification.new(
