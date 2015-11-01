@@ -1,4 +1,3 @@
-
 proxy:
   image: jwilder/nginx-proxy:latest
   ports:
@@ -15,7 +14,7 @@ redis:
   image: redis
 
 web:
-  image: push-notify
+  image: quay.io/markwiggles/push-notify
   environment:
     VIRTUAL_HOST: localhost
     RAILS_ENV: production
@@ -28,7 +27,7 @@ web:
   #   - .:/home/app/webapp
 
 worker:
-  image: push-notify
+  image: quay.io/markwiggles/push-notify
   command: bundle exec sidekiq -c 25
   environment:
     RAILS_ENV: production
