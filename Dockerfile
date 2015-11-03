@@ -15,8 +15,7 @@ RUN bundle install
 
 # Add the Rails app from the current directory to /webapp w- permissions
 ADD . /home/app/webapp
-RUN sudo mkdir -p tmp/pids
-RUN chown -R app:app /home/app/webapp && chmod -R u+rwX  tmp/pids/
+RUN chown -R app:app /home/app/webapp
 RUN mkdir /home/app/webapp/log && touch /home/app/webapp/log/production.log && \
 chmod -R 664 /home/app/webapp/log/production.log
 
