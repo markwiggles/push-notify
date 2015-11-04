@@ -1,20 +1,25 @@
 ActiveAdmin.register Device do
+ permit_params :token, :platform, :enabled, :user_id
 
-	permit_params :token, :platform, :enabled, :user_id
+ index do
+  column 'User' do |device|
+   User.find(device.user_id).name
+  end
+  column 'Email' do |device|
+   User.find(device.user_id).email
+  end
+  column :platform
+  column :enabled
+  column  do |resource|
+   create_action_icons(resource)
+  end
+ end
 
-
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if resource.something?
-#   permitted
-# end
-
-
+ form do |f|
+  inputs 'New Device' do
+    f.input :user_id, as: :select, prompt: '--select a user--', collection: User.pluck(:name, :id)
+    f.input :platform, as: :select, prompt: '--select a platform--', collection: ['iOS', 'Android']
+    f.input :token
+  end
+ end
 end
