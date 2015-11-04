@@ -14,10 +14,11 @@ redis:
   image: redis
 
 web:
-  image: quay.io/markwiggles/push-notify
-  # image: push-notify
+#  image: quay.io/markwiggles/push-notify
+  image: push-notify
   environment:
     VIRTUAL_HOST: localhost
+    # VIRTUAL_HOST: push.jolart.com
     RAILS_ENV: production
   env_file:
     - 'secrets.env'
@@ -28,8 +29,8 @@ web:
   #   - .:/home/app/webapp
 
 worker:
-  image: quay.io/markwiggles/push-notify
-  # image: push-notify
+  # image: quay.io/markwiggles/push-notify
+  image: push-notify
   command: bundle exec sidekiq -C config/sidekiq.yml
   environment:
     RAILS_ENV: production
